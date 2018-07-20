@@ -5,7 +5,7 @@
 
       <div class="form-group">
         <label for="title">Title</label>
-        <input #title="ngModel" required ngModel name="title" id="title" type="text" class="form-control">
+        <input #title="ngModel" required [(ngModel)]="product.title" name="title" id="title" type="text" class="form-control">
         <div class="form-text text-danger" *ngIf="title.touched && title.invalid">
           <small>Title is required!</small>
         </div>
@@ -17,7 +17,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
             </div>
-            <input #price="ngModel" required [min]="0" ngModel name="price" id="price" type="number" class="form-control">
+            <input #price="ngModel" required [min]="0" [(ngModel)]="product.price" name="price" id="price" type="number" class="form-control">
           </div>
           <div class="form-text text-danger" *ngIf="price.touched && price.invalid">
               <small *ngIf="price.errors.required">Price is required!</small>
@@ -27,7 +27,7 @@
     
       <div class="form-group">
           <label for="category">Category</label>
-          <select #category="ngModel" required ngModel name="category" id="category" class="form-control">
+          <select #category="ngModel" required [(ngModel)]="product.category" name="category" id="category" class="form-control">
             <option value=""></option>
             <option *ngFor="let c of categories$ | async" [value]="c.$key">
               {{c.name}}
@@ -40,7 +40,7 @@
     
       <div class="form-group">
           <label for="imageUrl">Image Url</label>
-          <input required url #imageUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control">
+          <input required url #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control">
           <div class="form-text text-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
               <small *ngIf="imageUrl.errors.required">Image URL is required!</small>
               <small *ngIf="imageUrl.errors.url">Please enter valid url!</small>
@@ -54,10 +54,10 @@
 
   <div class="col-md-6">
     <div class="card" style="width: 18rem;">
-      <img class="card-img-top" [src]="imageUrl.value">
+      <img class="card-img-top" [src]="product.imageUrl" *ngIf="product.imageUrl">
       <div class="card-body">
-        <h5 class="card-title">{{title.value}}</h5>
-        <p class="card-text">{{price.value | currency:'USD':true}}</p>
+        <h5 class="card-title">{{product.title}}</h5>
+        <p class="card-text">{{product.price | currency:'USD':true}}</p>
       </div>
     </div>
   </div>

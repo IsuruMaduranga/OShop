@@ -14,4 +14,8 @@ export class ProductService {
     return this.db.list('/products');
   }
 
+  get(productID){
+    return this.db.object('/products/'+productID);
+  }
+
 }
